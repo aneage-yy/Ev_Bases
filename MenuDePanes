@@ -1,0 +1,11 @@
+const mongoose = require("mongoose");
+
+const menuDePanesSchema = new mongoose.Schema({
+  nombre: { type: String, required: true },
+  precio: { type: Number, required: true },
+  descripcion: { type: String, required: true }
+});
+
+const MenuDePanes = mongoose.model("MenuDePanes", menuDePanesSchema);
+
+module.exports = MenuDePanes;
