@@ -6,7 +6,6 @@ const MenuDePanes = require("./menuDePanes");
 mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
 
-    // aqui metes un insertMany
     let result = await mongoose.connection.collection("ventasDePanes").insertMany([
         {
             nombreSucursal: "Panadería_withHoney Contry Sol",
@@ -18,6 +17,7 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
 
             ]
         },
+       /** 
         {
             nombreSucursal: "Panadería_withHoney Las Brisas",
             fechaVenta: "15/05/24",
@@ -51,15 +51,10 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
                 
             ]
         }
+*/
     ]);
     console.log(result);
-
-
-    // // Insertar un solo documento (tipo de pan)
-    // const pan1 = await MenuDePanes.create({
-    //   nombre: "Roles de miel",
-    //   descripcion: "Roles esponjosos, masa tipo brioche con relleno de miel, capeados con azúcar glass y canela ",
-      
-    // });
-
   })
+
+
+module.exports = ventasDePanes;
