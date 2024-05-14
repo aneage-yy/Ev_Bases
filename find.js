@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const MenuDePanes = require("./menuDePanes");
-const Venta = require("./ventaDePanes"); // Importa el modelo de VentaDePanes
 
 mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {

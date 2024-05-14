@@ -2,7 +2,6 @@ const readlineSync = require("readline-sync");
 const MenuDePanes = require("./MenuDePanes");
 const VentasDePanes = require("./ventasDePanes");
 
-
 async function buscarInfoVentaPorNombrePan() {
   const nombrePan = readlineSync.question("Ingrese el nombre del pan para buscar información de la venta: ");
   try {
@@ -69,8 +68,8 @@ async function quitarPan() {
 async function mostrarMenu() {
   while (true) {
     console.log("\nMenú:");
-    console.log("a) Buscar panes por ID");
-    console.log("b) Buscar ventas por ID");
+    console.log("a) Buscar panes por nombre"); //antes id
+    console.log("b) Busca ventas por nombre de la sucursal "); //antes id 
     console.log("c) Buscar información de la venta por nombre de pan");
     console.log("d) Actualizar el nombre de un pan");
     console.log("e) Agregar un pan al menú");

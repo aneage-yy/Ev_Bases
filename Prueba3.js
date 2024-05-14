@@ -10,9 +10,12 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
     async function iniciarMenu() {
       while (true) {
         console.log("\nMenú:");
+
         console.log("a) Buscar panes por nombre"); 
         console.log("b) Busca ventas por nombre de la sucursal "); 
+        
         console.log("c) Buscar información de la venta por nombre de pan");
+
         console.log("d) Actualizar el nombre de un pan");
         console.log("e) Agregar un pan al menú");
         console.log("f) Quitar un pan del menú");
@@ -49,7 +52,7 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
               const sucursal_solicitada = readlineSync.question(`Dime la sucursal a buscar: `);
                 try {
                   const cursor = await mongoose.connection.collection("ventasDePanes").find({ nombreSucursal: sucursal_solicitada });
-                  const result = await cursor.toArray(); // Convertir el cursor a un array de documentos
+                  const result = await cursor; // Convertir el cursor a un array de documentos
               
                   if (result.length > 0) {
                     // Iterar sobre cada documento encontrado en el resultado
@@ -70,10 +73,16 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
             
             break;
           case 'c':
-            // Agregar código para buscar información de venta por nombre de pan
+            // Buscar información de la venta por nombre de pan
+
+
+
+
             break;
           case 'd':
             // Agregar código para actualizar el nombre de un pan
+
+
             break;
           case 'e':
             // Agregar un pan al menú
@@ -91,16 +100,19 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
           case 'f':
                 // Quitar un pan del menú
                 const paaan = readlineSync.question(`Dime el pan a quitar: `);
+                const result = await mongoose.connection.collection("menudepanes").find({nombre: paaan}).toArray();
+                console.log(paaan)
+                console.log(result)
               
-                // Realiza la consulta para encontrar el pan por nombre
-                const result = await mongoose.connection.collection("menuDePanes").find({ nombre: paaan }).toArray();
-              
-                if (result.length > 0 && result[0].array_panes) {
+                if (result.length > 0) {
                   // Crear un array de ObjectIds a partir de los panes encontrados
-                  const array_panes = result[0].array_panes.map(pan => new ObjectId(pan._id.$oid));
+                  const panId =  result._id;
+                  console.log("AAAAAAAAAAAAAAAA")
+                //   console.log(array_panes)
               
                   // Consulta para encontrar los documentos basados en los ObjectIds
-                  const panesEncontrados = await mongoose.connection.collection("menuDePanes").find({ _id: { $in: array_panes } }).toArray();
+                  const panesEncontrados = await mongoose.connection.collection("ventasDePanes").find({ _id: { $in: panId } }).toArray();
+                  console.log("BBBBBBBBBBBBBBBB")
               
                   console.log("Panes encontrados:", panesEncontrados);
                 } else {

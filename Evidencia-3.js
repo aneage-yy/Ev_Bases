@@ -1,6 +1,8 @@
+/** 
 console.log("Hola, Bienvenido")
 const mongoose = require("mongoose");
 const MenuDePanes = require("./menuDePanes");
+const VentasDePanes = require("./ventasDePanes");
 
 mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -22,3 +24,4 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
 
 
 
+*/
