@@ -1,7 +1,7 @@
 const readlineSync = require("readline-sync");
 const mongoose = require("mongoose");
 
-
+const { ObjectId } = mongoose.Types;
 const MenuDePanes = require("./menuDePanes"); 
 mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
@@ -48,34 +48,49 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
               
 
           case 'b':
-            // Agregar código para buscar ventas por nombre de sucursal
-              const sucursal_solicitada = readlineSync.question(`Dime la sucursal a buscar: `);
-                try {
-                  const cursor = await mongoose.connection.collection("ventasDePanes").find({ nombreSucursal: sucursal_solicitada });
-                  const result = await cursor; // Convertir el cursor a un array de documentos
-              
-                  if (result.length > 0) {
-                    // Iterar sobre cada documento encontrado en el resultado
-                    console.log("dummy");
-                    result.forEach((venta) => {
-                      console.log("De la sucursal:", venta.nombreSucursal, );
-                      console.log("Fecha de la venta:", venta.fechaVenta);
-                      console.log("Los panes vendidos de esta sucursal son: :", venta.panesVendidos);
+             
+            const sucursal_solicitada = readlineSync.question(`Dime la sucursal a buscar: `);
+            try {
+              const cursor = await mongoose.connection.collection("ventasDePanes").find({ nombreSucursal: sucursal_solicitada });
+              const ventas = await cursor.toArray();
+          
+              if (ventas.length > 0) {
+                for (const venta of ventas) {
+                  console.log("                                      ");
+                  console.log("De la sucursal:", venta.nombreSucursal);
+                  console.log("Fecha de la venta:", venta.fechaVenta);
+                  console.log("Los panes vendidos de esta sucursal son:");
+          
+                  // Iterar sobre los IDs de los panes vendidos
+                  for (const panIdObj of venta.panesVendidos) {
+                    const panId = panIdObj._id.toString(); // Convertir el ID a string
+                   // console.log("- ID del pan vendido:", panId);
+          
+                    // Buscar el detalle del pan en la colección menuDePanes usando el ID
+                    const pan = await mongoose.connection.collection("menudepanes").findOne({ _id: new ObjectId(panId) });
+                    if (pan) {
+                      console.log("- Nombre del pan:", pan.nombre);
+                      //console.log("- Precio:", pan.precio);
+                      
                       console.log("--------------");
-                    });
-                  } else {
-                    console.log("No se encontró información para esa sucursal.");
+                    } else {
+                      console.log("- Pan no encontrado para ID:", panId);
+                    }
                   }
-                } catch (error) {
-                  console.error("Error la venta panes por sucursal:", error);
                 }
-                
-            
+              } else {
+                console.log("No se encontró información para esa sucursal.");
+              }
+            } catch (error) {
+              console.error("Error al buscar ventas por sucursal:", error);
+            }
             break;
+                    
           case 'c':
+            console.log("Busquemos el nombre ");
+
             // Buscar información de la venta por nombre de pan
-
-
+            
 
 
             break;
