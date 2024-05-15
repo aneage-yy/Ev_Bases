@@ -15,7 +15,7 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
         console.log("b) Buscar ventas por nombre de la sucursal "); 
         
         console.log("c) Actualizar el nombre de un pan");
-        console.log("d) Actualizar el nombre de un pan");
+        console.log("d) Actualizar el nombre de una sucursal");
 
         console.log("e) Agregar un pan al menú");
 

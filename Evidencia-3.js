@@ -1,4 +1,4 @@
-/** 
+
 console.log("Hola, Bienvenido")
 const mongoose = require("mongoose");
 const MenuDePanes = require("./menuDePanes");
@@ -24,4 +24,3 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
 
 
 
-*/
