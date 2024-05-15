@@ -47,8 +47,7 @@ mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlPa
             panesVendidos:  [
                 {_id: new ObjectId("66406fad549d3080597a8f73")}, //Pan relleno de queso crema
                 {_id: new ObjectId("66406fad549d3080597a8f75")}, //queso mozarella
-                {_id: new ObjectId("66406fad549d3080597a8f71")} //de fresa
-                
+                {_id: new ObjectId("66406fad549d3080597a8f71")} //de fresa              
             ]
         }
 */

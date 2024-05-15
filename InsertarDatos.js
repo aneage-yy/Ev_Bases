@@ -1,7 +1,6 @@
  
 const mongoose = require("mongoose");
 const MenuDePanes = require("./menuDePanes"); // Importa tu modelo de datos
-  
 // Conexión a MongoDB
 mongoose.connect("mongodb://localhost:27017/Panadería_withHoney", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
